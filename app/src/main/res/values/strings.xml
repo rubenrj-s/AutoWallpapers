@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AutoWallpapers</string>
+    <string name="title_activity_wallpaper_rules">WallpaperRulesActivity</string>
+    <string name="action_settings">Settings</string>
+</resources>
