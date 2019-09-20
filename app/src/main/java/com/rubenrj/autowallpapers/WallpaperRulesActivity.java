@@ -1,7 +1,9 @@
 package com.rubenrj.autowallpapers;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -203,7 +205,8 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     }
 
     private void save() {
-        //TODO: Debug that to check working
+        boolean error = false;
+        //TODO: Debug that to check if it works
         if (uriImage != null) {
             rulesModel.since = tvSince.getText().toString();
             rulesModel.to = tvTo.getText().toString();
@@ -232,30 +235,41 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     rulesModel.imagePath = fileNewPath;
                     if (!lastImage.isEmpty()) {
                         if (new File(getFilesDir() + "/" + lastImage).delete()){
-                            Log.i("wra", "Wallpaper antiguo eliminado.");
+                            Log.i("wra", "Old wallpaper deleted.");
                         }
                     }
                 } catch (FileNotFoundException e) {
+                    error = true;
+                    Toast.makeText(this,"Some error occurred saving changes.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 } catch (IOException e) {
+                    error = true;
+                    Toast.makeText(this,"Some error occurred saving changes.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
-
-            if (!rulesModel.imagePath.isEmpty()) {
-                SaveManager sm = new SaveManager();
-                if (id != null) {
-                    sm.setWallpaperRule(Integer.parseInt(id), rulesModel);
-                    Log.i("wra", "Rule modificated");
+            if (!error) {
+                if (!rulesModel.imagePath.isEmpty()) {
+                    SaveManager sm = new SaveManager();
+                    if (id != null) {
+                        sm.setWallpaperRule(Integer.parseInt(id), rulesModel);
+                        Log.i("wra", "Rule edited");
+                    } else {
+                        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+                        int currentCounter = sharedPref.getInt("idCounter", -1);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putInt("idCounter", ++currentCounter);
+                        editor.apply();
+                        rulesModel.id = currentCounter;
+                        sm.addWallpaperRule(rulesModel);
+                        Log.i("wra", "Rule added");
+                    }
+                    Toast.makeText(this, "Rule saved", Toast.LENGTH_SHORT).show();
                 } else {
-                    sm.addWallpaperRule(rulesModel);
-                    Log.i("wra", "Rule added");
+                    //TODO: Check conditions, that conditions shouldn't exist
+                    Log.w("wra", "The image path is empty, check errors...");
+                    Toast.makeText(this,"No image path", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(this, "Rule saved", Toast.LENGTH_SHORT).show();
-            } else {
-                //TODO: Check conditions, that case shouldn't exist
-                Log.w("wra", "The image path is empty, check errors...");
-                Toast.makeText(this,"No image path", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this,"No image selected", Toast.LENGTH_SHORT).show();

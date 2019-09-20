@@ -13,12 +13,11 @@ public class WallpaperRule {
     public String imagePath;
 
     public WallpaperRule(){
-        //TODO: Change to default when I'll finalize tests
         this.since = "00:00";
         this.to = "00:00";
         this.days = new boolean[] {true, true, true, true, true, true, true};
         this.imagePath = "";
-        this.id = 1;
+        this.id = -1;
     }
 
     public WallpaperRule(String since, String to, boolean[] days, String imagePath, int id){

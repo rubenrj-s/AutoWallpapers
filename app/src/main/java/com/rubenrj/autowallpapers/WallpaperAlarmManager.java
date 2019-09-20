@@ -20,15 +20,15 @@ public class WallpaperAlarmManager {
 
     private ArrayList<WallpaperRule> filterToday(ArrayList<WallpaperRule> list){
         Collections.sort(list, WallpaperRule.orderBySince);
-        int dow = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        if(dow == 1){
-            dow = 6;
+        int dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        if(dayOfWeek == 1){
+            dayOfWeek = 6;
         } else {
-            dow = dow - 2;
+            dayOfWeek = dayOfWeek - 2;
         }
         ArrayList<WallpaperRule> filtered = new ArrayList<>();
         for (WallpaperRule wr: list) {
-            if(wr.days[dow]){
+            if(wr.days[dayOfWeek]){
                 filtered.add(wr);
             }
         }

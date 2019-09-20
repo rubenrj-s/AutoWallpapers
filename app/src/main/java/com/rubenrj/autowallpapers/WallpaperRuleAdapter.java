@@ -48,10 +48,8 @@ public class WallpaperRuleAdapter extends ArrayAdapter<WallpaperRule> {
                     view.findViewById(R.id.saturdayView),
                     view.findViewById(R.id.sundayView)
             };
-//            ImageView wifi = (ImageView) view.findViewById(R.id.imgWifi);
-//            ImageView localization = (ImageView) view.findViewById(R.id.imgLoc);
-            ImageView wallpaper = view.findViewById(R.id.imgWallpaper);
 
+            ImageView wallpaper = view.findViewById(R.id.imgWallpaper);
             //Fill hours
             hours.setText(String.format("%1$s/%2$s", wallpaperRule.since, wallpaperRule.to));
             //Fill days
@@ -62,7 +60,6 @@ public class WallpaperRuleAdapter extends ArrayAdapter<WallpaperRule> {
             }
             //Fill wallpaper
             wallpaper.setImageURI(Uri.fromFile(new File(context.getFilesDir() + "/" + wallpaperRule.imagePath)));
-            //TODO: Fill options like Wifi or Location
             return view;
         }
     }
