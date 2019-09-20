@@ -8,21 +8,18 @@ import java.util.Comparator;
 public class WallpaperRule {
     public int id;
     public String since;
-    public String to;
     public boolean[] days;
     public String imagePath;
 
     public WallpaperRule(){
         this.since = "00:00";
-        this.to = "00:00";
         this.days = new boolean[] {true, true, true, true, true, true, true};
         this.imagePath = "";
         this.id = -1;
     }
 
-    public WallpaperRule(String since, String to, boolean[] days, String imagePath, int id){
+    public WallpaperRule(String since, boolean[] days, String imagePath, int id){
         this.since = since;
-        this.to = to;
         this.days = days;
         this.imagePath = imagePath;
         this.id = id;

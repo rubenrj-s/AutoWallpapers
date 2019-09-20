@@ -64,8 +64,6 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         });
         tvSince = findViewById(R.id.tvSince);
         tvSince.setOnClickListener(this);
-        tvTo = findViewById(R.id.tvTo);
-        tvTo.setOnClickListener(this);
 
         //TODO: Remember initialize with property info
         if (id == null) {
@@ -75,7 +73,6 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         }
 
         tvSince.setText(rulesModel.since);
-        tvTo.setText(rulesModel.to);
 
         days = new ToggleButton[]{
                 findViewById(R.id.tbMonday),
@@ -125,9 +122,6 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.tvSince:
                 showTimeDialog(tvSince);
-                break;
-            case R.id.tvTo:
-                showTimeDialog(tvTo);
                 break;
             case R.id.imgWallpaper:
                 selectWallpaper();
@@ -209,7 +203,6 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         //TODO: Debug that to check if it works
         if (uriImage != null) {
             rulesModel.since = tvSince.getText().toString();
-            rulesModel.to = tvTo.getText().toString();
             rulesModel.days = getDays();
             //Only if it is a new image we create a new file.
             if (lastImage != null) {

@@ -29,7 +29,7 @@ android:layout_height="match_parent">
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Intervalo de horas"
+        android:text="A partir de las"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarWr" />
@@ -38,32 +38,19 @@ android:layout_height="match_parent">
         android:id="@+id/tvSince"
         android:layout_width="wrap_content"
         android:layout_height="71dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="00:00"
         android:textSize="60dip"
-        app:layout_constraintEnd_toStartOf="@+id/tvTo"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInterval" />
-
-    <TextView
-        android:id="@+id/tvTo"
-        android:layout_width="wrap_content"
-        android:layout_height="73dp"
-        android:layout_marginTop="8dp"
-        android:text="00:00"
-        android:textSize="60dip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvSince"
         app:layout_constraintTop_toBottomOf="@+id/tvInterval" />
 
     <TextView
         android:id="@+id/tvDays"
         android:layout_width="192dp"
         android:layout_height="23dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Días"
         android:textSize="18sp"

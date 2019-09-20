@@ -51,7 +51,7 @@ public class WallpaperRuleAdapter extends ArrayAdapter<WallpaperRule> {
 
             ImageView wallpaper = view.findViewById(R.id.imgWallpaper);
             //Fill hours
-            hours.setText(String.format("%1$s/%2$s", wallpaperRule.since, wallpaperRule.to));
+            hours.setText(String.format("%1$s", wallpaperRule.since));
             //Fill days
             for (int i = 0; i < 7; i++){
                 if(wallpaperRule.days[i]){
