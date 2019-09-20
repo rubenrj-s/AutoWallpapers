@@ -2,7 +2,6 @@ package com.rubenrj.autowallpapers;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WallpaperRuleAdapter extends ArrayAdapter<WallpaperRule> {
         private Context context;

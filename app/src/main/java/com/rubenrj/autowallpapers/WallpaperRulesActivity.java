@@ -1,7 +1,6 @@
 package com.rubenrj.autowallpapers;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -36,9 +35,10 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
+    public static final int ACTIVITY_CODE = 1002;
 
     WallpaperRule rulesModel;
-    TextView tvSince, tvTo;
+    TextView tvSince;
     ToggleButton[] days;
     Toolbar toolbarWr;
     ImageView wallpaper;
@@ -258,6 +258,8 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                         Log.i("wra", "Rule added");
                     }
                     Toast.makeText(this, "Rule saved", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
                 } else {
                     //TODO: Check conditions, that conditions shouldn't exist
                     Log.w("wra", "The image path is empty, check errors...");
