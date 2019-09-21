@@ -16,17 +16,24 @@ public class WallpaperReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String imagePath = intent.getStringExtra("imagePath");
-        Log.i("WallpaperReceiver", imagePath);
-        try {
-            InputStream is = new FileInputStream(new File(context.getFilesDir(), imagePath));
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
-            wallpaperManager.setStream(is);
-        } catch (FileNotFoundException e) {
-            Log.e("WallpaperReceiver", "Error creating a input stream to set wallpaper.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("WallpaperReceiver", "Error setting the input stream.");
-            e.printStackTrace();
+        if(imagePath != null){
+            Log.i("WallpaperReceiver", imagePath);
+            try {
+                InputStream is = new FileInputStream(new File(context.getFilesDir(), imagePath));
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
+                wallpaperManager.setStream(is);
+            } catch (FileNotFoundException e) {
+                Log.e("WallpaperReceiver", "Error creating a input stream to set wallpaper.");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.e("WallpaperReceiver", "Error setting the input stream.");
+                e.printStackTrace();
+            }
+            return;
         }
+        if(intent.getBooleanExtra("checkRecursive", false)) {
+           new WallpaperAlarmManager(new SaveManager(context).getWallpaperRules(), context).startScheduledWallpaper();
+        }
+
     }
 }

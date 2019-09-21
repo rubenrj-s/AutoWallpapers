@@ -37,9 +37,27 @@ public class WallpaperAlarmManager {
 
     //Start to organize all wallpapers task
     public void startScheduledWallpaper() {
-        for (int i = 0, s = list.size(); i < s; i++) {
-            addScheduledWallpaper(list.get(i));
+        int s = list.size();
+        if(s > 0) {
+            for (int i = 0; i < s; i++) {
+                addScheduledWallpaper(list.get(i));
+            }
+            setRecursiveTask();
         }
+    }
+
+    public void setRecursiveTask(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+        Intent intent = new Intent(context, WallpaperReceiver.class);
+        intent.putExtra("checkRecursive", true);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, -2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     //Cancel a particular wallpaper task
@@ -56,7 +74,6 @@ public class WallpaperAlarmManager {
             cancelScheduledWallpaper(requestCode);
         }
 
-        boolean addTask = false;
         int wrIndex = -1;
         Calendar c = Calendar.getInstance();
         String currentTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
