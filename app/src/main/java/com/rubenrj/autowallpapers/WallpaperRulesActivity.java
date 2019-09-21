@@ -51,7 +51,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_rules);
         //We need that id to change a existent wr in array
-        id = getIntent().getStringExtra("id"); //TODO: If null is a new WallpaperRules
+        id = getIntent().getStringExtra("id"); //If null is a new WallpaperRules
         toolbarWr = findViewById(R.id.toolbarWr);
         setSupportActionBar(toolbarWr);
         //Only for API +21
@@ -95,6 +95,10 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission((Manifest.permission.READ_EXTERNAL_STORAGE))
                             == PackageManager.PERMISSION_DENIED) {
+                        if(!shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)){
+                            Toast.makeText(getApplicationContext(), "You need enable the read external storage permission manually in settings", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         //permission not granted request
                         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                         //show popup for runtime permission
