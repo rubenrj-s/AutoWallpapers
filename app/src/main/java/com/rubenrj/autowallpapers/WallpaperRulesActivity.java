@@ -1,6 +1,7 @@
 package com.rubenrj.autowallpapers;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -136,13 +138,23 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_wr, menu);
+        if(id == null){
+            menu.findItem(R.id.delete).setVisible(false).setEnabled(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.save_black) {
-            save();
+        switch (item.getItemId()) {
+            case R.id.save: {
+                saveWallpaperRule();
+            }
+            break;
+            case R.id.delete: {
+                deleteWallpaperRule();
+            }
+            break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -202,7 +214,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         return days;
     }
 
-    private void save() {
+    private void saveWallpaperRule() {
         boolean error = false;
         //TODO: Debug that to check if it works
         if (uriImage != null) {
@@ -279,5 +291,22 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_CODE);
+    }
+
+    private void deleteWallpaperRule(){
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want delete the rule?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        new File(getFilesDir(), rulesModel.imagePath).delete();
+                        new SaveManager(getApplicationContext()).removeWallpaperRule(rulesModel.id);
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 }
