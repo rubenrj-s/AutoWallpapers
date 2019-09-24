@@ -46,14 +46,14 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     ImageView wallpaper;
     private Uri uriImage;
     private String lastImage = null;
-    private String id;
+    private String index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_rules);
-        //We need that id to change a existent wr in array
-        id = getIntent().getStringExtra("id"); //If null is a new WallpaperRules
+        //We need that index to change a existent wr in array
+        index = getIntent().getStringExtra("index"); //If null is a new WallpaperRules
         toolbarWr = findViewById(R.id.toolbarWr);
         setSupportActionBar(toolbarWr);
         //Only for API +21
@@ -68,10 +68,10 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         tvSince.setOnClickListener(this);
 
         //TODO: Remember initialize with property info
-        if (id == null) {
+        if (index == null) {
             rulesModel = new WallpaperRule();
         } else {
-            rulesModel = new SaveManager().getWallpaperRules().get(Integer.parseInt(id));
+            rulesModel = new SaveManager().getWallpaperRules().get(Integer.parseInt(index));
         }
 
         tvSince.setText(rulesModel.since);
@@ -138,7 +138,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_wr, menu);
-        if(id == null){
+        if(index == null){
             menu.findItem(R.id.delete).setVisible(false).setEnabled(false);
         }
         return super.onCreateOptionsMenu(menu);
@@ -260,8 +260,8 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
             if (!error) {
                 if (!rulesModel.imagePath.isEmpty()) {
                     SaveManager sm = new SaveManager();
-                    if (id != null) {
-                        sm.setWallpaperRule(Integer.parseInt(id), rulesModel);
+                    if (index != null) {
+                        sm.setWallpaperRule(Integer.parseInt(index), rulesModel);
                         Log.i("wra", "Rule edited");
                     } else {
                         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
@@ -300,7 +300,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         new File(getFilesDir(), rulesModel.imagePath).delete();
-                        new SaveManager(getApplicationContext()).removeWallpaperRule(rulesModel.id);
+                        new SaveManager(getApplicationContext()).removeWallpaperRule(Integer.parseInt(index));
                         setResult(RESULT_OK);
                         finish();
                     }

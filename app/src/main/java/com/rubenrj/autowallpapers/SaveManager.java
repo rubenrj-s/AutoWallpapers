@@ -86,12 +86,12 @@ public class SaveManager {
 
 
     public void addWallpaperRule(WallpaperRule element) {
-        WallpaperAlarmManager wam = new WallpaperAlarmManager(wrList, context);
-        if(wrList.size() == 0){
-            wam.setRecursiveTask();
-        }
+        boolean doRecursive = false;
+        if(wrList.size() == 0) doRecursive = true;
         wrList.add(element);
+        WallpaperAlarmManager wam = new WallpaperAlarmManager(wrList, context);
         setJsonString();
+        if(doRecursive) wam.setRecursiveTask();
         wam.checkScheduledWallpaper(element.id, false);
     }
 

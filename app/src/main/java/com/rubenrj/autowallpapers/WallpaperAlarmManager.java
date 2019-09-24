@@ -60,15 +60,15 @@ public class WallpaperAlarmManager {
                 AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
-    //Cancel a particular wallpaper task
+    // Cancel a particular wallpaper task
     public void cancelScheduledWallpaper(int requestCode) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
         Intent intent = new Intent(context, WallpaperReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
     }
 
-    //Check if add a new/edit wallpaper task
+    // Check if add a new/edit wallpaper task
     public void checkScheduledWallpaper(int requestCode, boolean edit) {
         if(edit){
             cancelScheduledWallpaper(requestCode);
@@ -81,17 +81,17 @@ public class WallpaperAlarmManager {
         for (int i = 0, s = list.size(); i < s;  i++) {
             if (wrIndex == -1 && list.get(i).id == requestCode) {
                 wrIndex = i;
-                //If the new time is more than current time
-                if(UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0){
+                // If it's the only or new time is more than current time
+                if((wrIndex == 0 && s == 1) || UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0){
                     addScheduledWallpaper(list.get(wrIndex));
-                    //Stop loop
+                    // Stop loop
                     i = s;
                 }
             } else if(wrIndex != -1) {
-                //If we have index of new time and selected time is less than current time
+                // If we have index of new time and selected time is less than current time
                 if(UtilsHelper.compareTimes(list.get(i).since, currentTime) < 0)
                 {
-                    //Stop loop and not add
+                    // Stop loop and not add
                     i = s;
                 } else {
                     addScheduledWallpaper(list.get(wrIndex));
@@ -111,6 +111,6 @@ public class WallpaperAlarmManager {
         c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
         c.set(Calendar.MINUTE, Integer.parseInt(time[1]));
         c.set(Calendar.SECOND, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
 }

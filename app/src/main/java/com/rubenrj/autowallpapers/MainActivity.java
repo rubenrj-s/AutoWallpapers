@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void openWallpaperRules(String index){
         Intent intent = new Intent(this, WallpaperRulesActivity.class);
         if(index != null){
-            intent.putExtra("id", index);
+            intent.putExtra("index", index);
         }
         startActivityForResult(intent, WallpaperRulesActivity.ACTIVITY_CODE);
     }
