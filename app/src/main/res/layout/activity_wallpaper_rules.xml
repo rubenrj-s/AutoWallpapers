@@ -173,11 +173,10 @@ android:layout_height="match_parent">
         android:layout_height="320dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorActivo"
+        android:background="#E1EAEE"
         app:layout_constraintDimensionRatio="H,16:9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWallpaper"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[8]" />
+        app:layout_constraintTop_toBottomOf="@+id/tvWallpaper" />
 
     <Space
         android:layout_width="0dp"
