@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         wrList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("info", "Click en " + position);
+                Log.i("info", "Click on " + position);
                 openWallpaperRules(String.valueOf(position));
             }
         });

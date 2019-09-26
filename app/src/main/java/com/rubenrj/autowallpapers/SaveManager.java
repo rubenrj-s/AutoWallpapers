@@ -61,12 +61,12 @@ public class SaveManager {
                     jsonString = new String(buffer);
                 }
             } catch (Exception e) {
-                Log.w("savemanager", "Some error has occurred reading.");
+                Log.w("savemanager", "Some error has occurred reading wallpaper rules.");
                 //If there are data is better return the last data.
                 if(jsonString.isEmpty()){
                     jsonString = "[]";
                 }
-                Toast.makeText(context, "Some error has occurred reading.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.savemanager_error_reading), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }

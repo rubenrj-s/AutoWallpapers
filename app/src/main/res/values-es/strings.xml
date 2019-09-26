@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AutoWallpapers</string>
+    <string name="action_settings">Configuración</string>
+    <string name="dialog_delete_accept">Borrar</string>
+    <string name="dialog_delete_cancel">Cancelar</string>
+    <string name="dialog_delete_title">¿Quieres borrar esta regla?</string>
+    <string name="savemanager_error_reading">Algún error sucedió en la lectura del archivo.</string>
+    <string name="toast_error_image_unselected">Sin imagen seleccionada</string>
+    <string name="toast_error_imagepath">Imagen sin ruta</string>
+    <string name="toast_error_saving">Algún error ha ocurrido al intentar guardar el cambio.</string>
+    <string name="toast_need_enable_storage_permmision">Necesitas habilitar el permiso de almacenamiento manualmente en Ajustes</string>
+    <string name="toast_permission_denied">Permiso denegado!</string>
+    <string name="toast_rule_saved">Regla guardada</string>
+</resources>

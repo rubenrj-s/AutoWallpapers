@@ -98,7 +98,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     if (checkSelfPermission((Manifest.permission.READ_EXTERNAL_STORAGE))
                             == PackageManager.PERMISSION_DENIED) {
                         if(!shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)){
-                            Toast.makeText(getApplicationContext(), "You need enable the read external storage permission manually in settings", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.toast_need_enable_storage_permmision), Toast.LENGTH_LONG).show();
                             return;
                         }
                         //permission not granted request
@@ -168,7 +168,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     selectWallpaper();
                 } else {
                     // permission denied
-                    Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, this.getString(R.string.toast_permission_denied), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -249,11 +249,11 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     }
                 } catch (FileNotFoundException e) {
                     error = true;
-                    Toast.makeText(this,"Some error occurred saving changes.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, this.getString(R.string.toast_error_saving), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 } catch (IOException e) {
                     error = true;
-                    Toast.makeText(this,"Some error occurred saving changes.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, this.getString(R.string.toast_error_saving), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -273,17 +273,17 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                         sm.addWallpaperRule(rulesModel);
                         Log.i("wra", "Rule added");
                     }
-                    Toast.makeText(this, "Rule saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, this.getString(R.string.toast_rule_saved), Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
                 } else {
                     //TODO: Check conditions, that conditions shouldn't exist
                     Log.w("wra", "The image path is empty, check errors...");
-                    Toast.makeText(this,"No image path", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, this.getString(R.string.toast_error_imagepath), Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
-            Toast.makeText(this,"No image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, this.getString(R.string.toast_error_image_unselected), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -296,8 +296,8 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     private void deleteWallpaperRule(){
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you want delete the rule?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.dialog_delete_title)
+                .setPositiveButton(getString(R.string.dialog_delete_accept), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         new File(getFilesDir(), rulesModel.imagePath).delete();
                         new SaveManager(getApplicationContext()).removeWallpaperRule(Integer.parseInt(index));
@@ -305,7 +305,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                         finish();
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.dialog_delete_cancel), null)
                 .create()
                 .show();
     }
