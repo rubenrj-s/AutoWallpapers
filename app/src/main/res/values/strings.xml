@@ -11,4 +11,15 @@
     <string name="dialog_delete_title">Do you want delete the rule?</string>
     <string name="dialog_delete_accept">Delete</string>
     <string name="dialog_delete_cancel">Cancel</string>
+    <string name="tv_from">From</string>
+    <string name="tv_days">Days</string>
+    <string name="tb_monday">M</string>
+    <string name="tb_tuesday">T</string>
+    <string name="tb_wednesday">W</string>
+    <string name="tb_thursday">Th</string>
+    <string name="tb_friday">F</string>
+    <string name="tb_saturday">S</string>
+    <string name="tb_sunday">Su</string>
+    <string name="tv_wallpaper">Wallpaper</string>
+    <string name="tv_no_rules">Don\'t exists rules</string>
 </resources>
