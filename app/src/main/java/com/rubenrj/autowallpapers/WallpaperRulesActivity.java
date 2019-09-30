@@ -19,7 +19,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -44,6 +46,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     ToggleButton[] days;
     Toolbar toolbarWr;
     ImageView wallpaper;
+    ProgressBar progressBar;
     private Uri uriImage;
     private String lastImage = null;
     private String index;
@@ -52,6 +55,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_rules);
+        progressBar = findViewById(R.id.indeterminateBar);
         //We need that index to change a existent wr in array
         index = getIntent().getStringExtra("index"); //If null is a new WallpaperRules
         toolbarWr = findViewById(R.id.toolbarWr);
@@ -97,10 +101,6 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission((Manifest.permission.READ_EXTERNAL_STORAGE))
                             == PackageManager.PERMISSION_DENIED) {
-                        if(!shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)){
-                            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.toast_need_enable_storage_permmision), Toast.LENGTH_LONG).show();
-                            return;
-                        }
                         //permission not granted request
                         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                         //show popup for runtime permission
@@ -120,6 +120,13 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
             wallpaper.setImageURI(uriImage);
         }
         //TODO: Check the method to show a permanent deny
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //TODO: Check if I can cancel other operations
+        dismissProgressBar();
     }
 
     @Override
@@ -167,6 +174,10 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     // permission granted
                     selectWallpaper();
                 } else {
+                    if(!shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)){
+                        Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.toast_need_enable_storage_permmision), Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     // permission denied
                     Toast.makeText(this, this.getString(R.string.toast_permission_denied), Toast.LENGTH_SHORT).show();
                 }
@@ -218,6 +229,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
         boolean error = false;
         //TODO: Debug that to check if it works
         if (uriImage != null) {
+            showProgressBar();
             rulesModel.since = tvSince.getText().toString();
             rulesModel.days = getDays();
             //Only if it is a new image we create a new file.
@@ -274,6 +286,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                         Log.i("wra", "Rule added");
                     }
                     Toast.makeText(this, this.getString(R.string.toast_rule_saved), Toast.LENGTH_SHORT).show();
+                    dismissProgressBar();
                     setResult(RESULT_OK);
                     finish();
                 } else {
@@ -282,6 +295,7 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                     Toast.makeText(this, this.getString(R.string.toast_error_imagepath), Toast.LENGTH_SHORT).show();
                 }
             }
+            dismissProgressBar();
         } else {
             Toast.makeText(this, this.getString(R.string.toast_error_image_unselected), Toast.LENGTH_SHORT).show();
         }
@@ -294,13 +308,14 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
     }
 
     private void deleteWallpaperRule(){
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.dialog_delete_title)
                 .setPositiveButton(getString(R.string.dialog_delete_accept), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        showProgressBar();
                         new File(getFilesDir(), rulesModel.imagePath).delete();
                         new SaveManager(getApplicationContext()).removeWallpaperRule(Integer.parseInt(index));
+                        dismissProgressBar();
                         setResult(RESULT_OK);
                         finish();
                     }
@@ -308,5 +323,15 @@ public class WallpaperRulesActivity extends AppCompatActivity implements View.On
                 .setNegativeButton(getString(R.string.dialog_delete_cancel), null)
                 .create()
                 .show();
+    }
+
+    private void showProgressBar(){
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void dismissProgressBar(){
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 }

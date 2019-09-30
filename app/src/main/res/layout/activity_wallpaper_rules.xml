@@ -7,184 +7,197 @@ tools:context=".MainActivity"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
 
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarWr"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="New Wallpaper"
-        app:titleTextColor="#FFFFFF"
-        tools:layout_editor_absoluteX="16dp" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvInterval"
-        android:layout_width="192dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/tv_from"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarWr" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarWr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="New Wallpaper"
+            app:titleTextColor="#FFFFFF"
+            tools:layout_editor_absoluteX="16dp" />
 
-    <TextView
-        android:id="@+id/tvSince"
-        android:layout_width="wrap_content"
-        android:layout_height="71dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="00:00"
-        android:textSize="60dip"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInterval" />
+        <TextView
+            android:id="@+id/tvInterval"
+            android:layout_width="192dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/tv_from"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarWr" />
 
-    <TextView
-        android:id="@+id/tvDays"
-        android:layout_width="192dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/tv_days"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSince" />
+        <TextView
+            android:id="@+id/tvSince"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="00:00"
+            android:textSize="60dip"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvInterval" />
 
-    <ToggleButton
-        android:id="@+id/tbMonday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textColorLink="@color/colorActivo"
-        android:textOff="@string/tb_monday"
-        android:textOn="@string/tb_monday"
-        app:layout_constraintEnd_toStartOf="@+id/tbTuesday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <TextView
+            android:id="@+id/tvDays"
+            android:layout_width="192dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_days"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSince" />
 
-    <ToggleButton
-        android:id="@+id/tbTuesday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_tuesday"
-        android:textOn="@string/tb_tuesday"
-        app:layout_constraintEnd_toStartOf="@+id/tbWednesday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbMonday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbMonday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textColorLink="@color/colorActivo"
+            android:textOff="@string/tb_monday"
+            android:textOn="@string/tb_monday"
+            app:layout_constraintEnd_toStartOf="@+id/tbTuesday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ToggleButton
-        android:id="@+id/tbWednesday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_wednesday"
-        android:textOn="@string/tb_wednesday"
-        app:layout_constraintEnd_toStartOf="@+id/tbThursday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbTuesday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbTuesday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_tuesday"
+            android:textOn="@string/tb_tuesday"
+            app:layout_constraintEnd_toStartOf="@+id/tbWednesday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbMonday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ToggleButton
-        android:id="@+id/tbThursday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_thursday"
-        android:textOn="@string/tb_thursday"
-        app:layout_constraintEnd_toStartOf="@+id/tbFriday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbWednesday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbWednesday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_wednesday"
+            android:textOn="@string/tb_wednesday"
+            app:layout_constraintEnd_toStartOf="@+id/tbThursday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbTuesday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ToggleButton
-        android:id="@+id/tbFriday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_friday"
-        android:textOn="@string/tb_friday"
-        app:layout_constraintEnd_toStartOf="@+id/tbSaturday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbThursday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbThursday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_thursday"
+            android:textOn="@string/tb_thursday"
+            app:layout_constraintEnd_toStartOf="@+id/tbFriday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbWednesday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ToggleButton
-        android:id="@+id/tbSaturday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_saturday"
-        android:textOn="@string/tb_saturday"
-        app:layout_constraintEnd_toStartOf="@+id/tbSunday"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbFriday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbFriday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_friday"
+            android:textOn="@string/tb_friday"
+            app:layout_constraintEnd_toStartOf="@+id/tbSaturday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbThursday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ToggleButton
-        android:id="@+id/tbSunday"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:checked="true"
-        android:text="ToggleButton"
-        android:textOff="@string/tb_sunday"
-        android:textOn="@string/tb_sunday"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbSaturday"
-        app:layout_constraintTop_toBottomOf="@+id/tvDays" />
+        <ToggleButton
+            android:id="@+id/tbSaturday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_saturday"
+            android:textOn="@string/tb_saturday"
+            app:layout_constraintEnd_toStartOf="@+id/tbSunday"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbFriday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <TextView
-        android:id="@+id/tvWallpaper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/tv_wallpaper"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbMonday" />
+        <ToggleButton
+            android:id="@+id/tbSunday"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="@string/tb_sunday"
+            android:textOn="@string/tb_sunday"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tbSaturday"
+            app:layout_constraintTop_toBottomOf="@+id/tvDays" />
 
-    <ImageView
-        android:id="@+id/ivWallpaper"
-        android:layout_width="180dp"
-        android:layout_height="320dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_add_wallpaper"
-        app:layout_constraintDimensionRatio="H, 16:9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWallpaper" />
+        <TextView
+            android:id="@+id/tvWallpaper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_wallpaper"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tbMonday" />
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivWallpaper" />
+        <ImageView
+            android:id="@+id/ivWallpaper"
+            android:layout_width="180dp"
+            android:layout_height="320dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_add_wallpaper"
+            app:layout_constraintDimensionRatio="H, 16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvWallpaper" />
 
-</android.support.constraint.ConstraintLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivWallpaper" />
+
+        <ProgressBar
+            android:id="@+id/indeterminateBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
