@@ -96,9 +96,11 @@ public class SaveManager {
     }
 
     public void removeWallpaperRule(int index) {
-        new WallpaperAlarmManager(wrList, context).cancelScheduledWallpaper(wrList.get(index).id);
+        WallpaperAlarmManager wam = new WallpaperAlarmManager(wrList, context);
+        wam.cancelScheduledWallpaper(wrList.get(index).id);
         wrList.remove(index);
         setJsonString();
+        if (wrList.size() == 0) wam.stopRecursiveTask();
     }
 
     public void setWallpaperRule(int index, WallpaperRule element) {

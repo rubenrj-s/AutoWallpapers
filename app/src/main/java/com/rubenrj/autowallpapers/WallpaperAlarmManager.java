@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import java.util.Collections;
 public class WallpaperAlarmManager {
     ArrayList<WallpaperRule> list;
     Context context;
+    static private final int RECURSIVE_RC = -2;
 
     public WallpaperAlarmManager(ArrayList<WallpaperRule> list, Context context) {
         this.list = filterToday(list);
@@ -55,9 +57,14 @@ public class WallpaperAlarmManager {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
         Intent intent = new Intent(context, WallpaperReceiver.class);
         intent.putExtra("checkRecursive", true);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, -2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("WallpaperAlarmManager", calendar.toString());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, RECURSIVE_RC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+
+    public void stopRecursiveTask(){
+        cancelScheduledWallpaper(RECURSIVE_RC);
     }
 
     // Cancel a particular wallpaper task
