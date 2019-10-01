@@ -100,7 +100,11 @@ public class SaveManager {
         wam.cancelScheduledWallpaper(wrList.get(index).id);
         wrList.remove(index);
         setJsonString();
-        if (wrList.size() == 0) wam.stopRecursiveTask();
+        if (wrList.size() == 0){
+            wam.stopRecursiveTask();
+        } else {
+            wam.checkToChange();
+        }
     }
 
     public void setWallpaperRule(int index, WallpaperRule element) {

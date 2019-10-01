@@ -120,4 +120,27 @@ public class WallpaperAlarmManager {
         c.set(Calendar.SECOND, 0);
         alarmManager.setExact(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
+
+    public void checkToChange(){
+        int s = list.size();
+        if (s > 0) {
+            Calendar c = Calendar.getInstance();
+            String currentTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
+            if(s == 1 && UtilsHelper.compareTimes(currentTime, list.get(0).since) > 0) {
+                addScheduledWallpaper(list.get(0));
+            } else {
+                int iW = -1;
+                for (int i = 0; i < s;  i++) {
+                    if (UtilsHelper.compareTimes(currentTime, list.get(i).since) > 0) {
+                        iW = i;
+                    } else {
+                        i = s;
+                    }
+                }
+                if (iW != -1) {
+                    addScheduledWallpaper(list.get(iW));
+                }
+            }
+        }
+    }
 }

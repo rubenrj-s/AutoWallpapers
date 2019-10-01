@@ -29,9 +29,7 @@ public class WallpaperReceiver extends BroadcastReceiver {
                 Log.e("WallpaperReceiver", "Error setting the input stream.");
                 e.printStackTrace();
             }
-            return;
-        }
-        if(intent.getBooleanExtra("checkRecursive", false)) {
+        } else if(intent.getBooleanExtra("checkRecursive", false)) {
            new WallpaperAlarmManager(new SaveManager(context).getWallpaperRules(), context).startScheduledWallpaper();
         }
 
