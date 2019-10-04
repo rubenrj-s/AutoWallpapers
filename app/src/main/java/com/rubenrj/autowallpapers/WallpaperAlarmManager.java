@@ -44,8 +44,8 @@ public class WallpaperAlarmManager {
             for (int i = 0; i < s; i++) {
                 addScheduledWallpaper(list.get(i));
             }
-            setRecursiveTask();
         }
+        setRecursiveTask();
     }
 
     public void setRecursiveTask(){
