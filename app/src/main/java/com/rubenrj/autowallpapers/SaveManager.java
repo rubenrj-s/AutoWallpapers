@@ -100,6 +100,7 @@ public class SaveManager {
         wam.cancelScheduledWallpaper(wrList.get(index).id);
         wrList.remove(index);
         setJsonString();
+        wam = new WallpaperAlarmManager(wrList, context);
         if (wrList.size() == 0){
             wam.stopRecursiveTask();
         } else {

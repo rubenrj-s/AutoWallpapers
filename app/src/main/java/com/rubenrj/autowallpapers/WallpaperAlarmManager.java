@@ -84,25 +84,17 @@ public class WallpaperAlarmManager {
         int wrIndex = -1;
         Calendar c = Calendar.getInstance();
         String currentTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
-
+        boolean add = false;
         for (int i = 0, s = list.size(); i < s;  i++) {
             if (wrIndex == -1 && list.get(i).id == requestCode) {
                 wrIndex = i;
-                // If it's the only or new time is more than current time
-                if((wrIndex == 0 && s == 1) || UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0){
-                    addScheduledWallpaper(list.get(wrIndex));
-                    // Stop loop
-                    i = s;
-                }
-            } else if(wrIndex != -1) {
-                // If we have index of new time and selected time is less than current time
-                if(UtilsHelper.compareTimes(list.get(i).since, currentTime) < 0)
-                {
-                    // Stop loop and not add
-                    i = s;
-                } else {
+                // If it's the last or new time is more than current time
+                if(UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0){
                     addScheduledWallpaper(list.get(wrIndex));
                 }
+                //Stop loop
+                i = s;
+                checkToChange();
             }
         }
 
@@ -121,6 +113,9 @@ public class WallpaperAlarmManager {
         alarmManager.setExact(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
 
+    /**
+     * Check if there is a wallpaper which must be setted at the current time
+     */
     public void checkToChange(){
         int s = list.size();
         if (s > 0) {
