@@ -1,7 +1,10 @@
 package com.rubenrj.autowallpapers;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +42,30 @@ public class MainActivity extends AppCompatActivity {
                 openWallpaperRules(String.valueOf(position));
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String keyName = "firstStart";
+        boolean firstStart = sharedPreferences.getBoolean(keyName, true);
+        if (sharedPreferences.getBoolean(keyName, true))
+        {
+            sharedPreferences.edit()
+                    .putBoolean(keyName, false)
+                    .apply();
+            String manufacturer = "xiaomi";
+            if (manufacturer.equalsIgnoreCase(android.os.Build.MANUFACTURER)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.dialog_miui_init_title)
+                        .setMessage(R.string.dialog_miui_init)
+                        .setPositiveButton(R.string.dialog_miui_init_accept, null)
+                        .setCancelable(false)
+                        .create()
+                        .show();
+            }
+        }
     }
 
     @Override

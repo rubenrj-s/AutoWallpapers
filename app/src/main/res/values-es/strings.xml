@@ -23,4 +23,7 @@
     <string name="tv_wallpaper">Fondo de pantalla</string>
     <string name="tv_no_rules">No existen reglas</string>
     <string name="tb_wednesday">X</string>
+    <string name="dialog_miui_init"><![CDATA[Los dispositivos de Xiaomi con MIUI necesitan permisos manuales para que la aplicación mantenga su correcto funcionamiento después de un reinicio. Para ello vaya a Ajustes -> Aplicaciones instaladas, seleccione la aplicación y habilite el inicio automático.]]></string>
+    <string name="dialog_miui_init_title">Atención</string>
+    <string name="dialog_miui_init_accept">Aceptar</string>
 </resources>

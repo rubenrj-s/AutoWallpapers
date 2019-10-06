@@ -22,4 +22,7 @@
     <string name="tb_sunday">Su</string>
     <string name="tv_wallpaper">Wallpaper</string>
     <string name="tv_no_rules">Don\'t exists rules</string>
+    <string name="dialog_miui_init"><![CDATA[Xiaomi devices with MIUI need manual permissions for the application remain its proper functioning after a reboot. To do that go to Settings -> Installed applications, select the application and enable automatic init]]></string>
+    <string name="dialog_miui_init_title">Attention</string>
+    <string name="dialog_miui_init_accept">Accept</string>
 </resources>
