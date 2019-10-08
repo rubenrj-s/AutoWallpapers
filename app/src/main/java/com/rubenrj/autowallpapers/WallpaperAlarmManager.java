@@ -84,17 +84,24 @@ public class WallpaperAlarmManager {
         int wrIndex = -1;
         Calendar c = Calendar.getInstance();
         String currentTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
-        boolean add = false;
         for (int i = 0, s = list.size(); i < s;  i++) {
-            if (wrIndex == -1 && list.get(i).id == requestCode) {
-                wrIndex = i;
-                // If it's the last or new time is more than current time
-                if(UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0){
+            // If it was found
+            if (wrIndex != -1) {
+                // If it's the next then it's greater so if it's greater than currentTime then we must add
+                if(UtilsHelper.compareTimes(list.get(i).since, currentTime) > 0){
                     addScheduledWallpaper(list.get(wrIndex));
                 }
-                //Stop loop
                 i = s;
-                checkToChange();
+                // If it wasn't found and id is equals to requestCode
+            } else if (list.get(i).id == requestCode) {
+                wrIndex = i;
+                // If it's the last or new time is more than current time
+                if(UtilsHelper.compareTimes(list.get(wrIndex).since, currentTime) > 0 || i + 1 == s){
+                    addScheduledWallpaper(list.get(wrIndex));
+                    if(edit) checkToChange();
+                    //Stop loop
+                    i = s;
+                }
             }
         }
 
